@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EUNXIEL — Engineered Scent of the Future</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Montserrat:wght@100;200;300;400&family=Rajdhani:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ── CURSOR ──────────────────────────────────────────────── -->
+<div class="cursor"      id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ── NAVIGATION ──────────────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="#">EUNXI<span>EL</span></a>
+  <ul class="nav-links">
+    <li><a href="#collection">Collection</a></li>
+    <li><a href="#science">Science</a></li>
+    <li><a href="#ritual">Ritual</a></li>
+    <li><a href="reviews">Reviews</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="nav-cart" id="cartToggle" aria-label="Cart">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 01-8 0"/>
+      </svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+    <button class="nav-cta"><span>Discover</span></button>
+  </div>
+</nav>
+
+<!-- ── CART DRAWER ──────────────────────────────────────────── -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <div class="cart-title">YOUR CART <span id="cartCount">0 items</span></div>
+    <button class="cart-close" id="cartClose">&#x2715;</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmpty">
+      <div class="cart-empty-icon">&#x25C8;</div>
+      <div class="cart-empty-text">Your cart is empty</div>
+      <div class="cart-empty-sub">Add a fragrance to begin</div>
+    </div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-summary">
+      <div class="cart-subtotal"><span>Subtotal</span><span id="cartSubtotal">$0</span></div>
+      <div class="cart-shipping"><span>Shipping</span><span class="cart-shipping-free">Free</span></div>
+      <div class="cart-divider"></div>
+      <div class="cart-total"><span>Total</span><span id="cartTotal">$0</span></div>
+    </div>
+    <button class="cart-checkout-btn" id="checkoutBtn"><span>Proceed to Checkout</span></button>
+    <div class="cart-note">Quantum-encrypted &middot; Secure checkout</div>
+  </div>
+</div>
+
+<!-- ── CHECKOUT MODAL ───────────────────────────────────────── -->
+<div class="checkout-overlay" id="checkoutOverlay" style="display:none;">
+  <div class="checkout-modal" id="checkoutModal">
+    <div class="checkout-header">
+      <div class="checkout-title">CHECKOUT</div>
+      <button class="cart-close" id="checkoutClose">&#x2715;</button>
+    </div>
+    <div class="checkout-body">
+      <div class="checkout-section">
+        <div class="checkout-section-label">Contact</div>
+        <input class="checkout-input" type="email" placeholder="Email address" id="co-email"/>
+      </div>
+      <div class="checkout-section">
+        <div class="checkout-section-label">Shipping</div>
+        <input class="checkout-input" type="text" placeholder="Full name" id="co-name"/>
+        <input class="checkout-input" type="text" placeholder="Address" id="co-address"/>
+        <div class="checkout-row">
+          <input class="checkout-input" type="text" placeholder="City" id="co-city"/>
+          <input class="checkout-input" type="text" placeholder="Postal code" id="co-zip"/>
+        </div>
+      </div>
+      <div class="checkout-section">
+        <div class="checkout-section-label">Payment</div>
+        <input class="checkout-input" type="text" placeholder="Card number" id="co-card" maxlength="19"/>
+        <div class="checkout-row">
+          <input class="checkout-input" type="text" placeholder="MM / YY" id="co-expiry" maxlength="7"/>
+          <input class="checkout-input" type="text" placeholder="CVV" id="co-cvv" maxlength="3"/>
+        </div>
+      </div>
+      <div class="checkout-order-summary">
+        <div class="checkout-section-label">Order Summary</div>
+        <div id="checkoutSummaryItems"></div>
+        <div class="cart-divider" style="margin:16px 0"></div>
+        <div class="cart-total"><span>Total</span><span id="checkoutTotalAmt">$0</span></div>
+      </div>
+    </div>
+    <button class="cart-checkout-btn" id="placeOrderBtn"><span>Place Order &#x2192;</span></button>
+    <div class="cart-note" style="text-align:center;margin-top:12px;">This is a demo. No real payment is processed.</div>
+  </div>
+</div>
+
+<!-- ── ORDER SUCCESS ────────────────────────────────────────── -->
+<div class="checkout-overlay" id="successOverlay" style="display:none;">
+  <div class="checkout-modal success-modal">
+    <div class="success-icon">&#x2726;</div>
+    <div class="success-title">Order Confirmed</div>
+    <div class="success-sub">Your quantum-sealed order has been received.<br>Estimated dispatch: 2&#x2013;4 business days.</div>
+    <button class="cart-checkout-btn" id="successClose" style="margin-top:32px;">Continue Shopping</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <!-- Ambient hologram panels -->
+  <div class="holo-panel" style="left:60px;top:180px;opacity:0;animation:fadeIn 1.5s 2s forwards;">
+    SYS.INIT 0x4F3A<br>
+    MOLECULE: A7-LIGN<br>
+    TEMP: 21.4 °C<br>
+    STATUS: ACTIVE
+  </div>
+  <div class="holo-panel" style="right:60px;top:200px;text-align:right;opacity:0;animation:fadeIn 1.5s 2.2s forwards;">
+    BATCH: NX-2401<br>
+    PURITY: 99.7%<br>
+    ORIGIN: SYNTHETIC<br>
+    QUANTUM LOCKED
+  </div>
+
+  <!-- Bottle: above text in flex column -->
+  <div class="hero-bottle-wrap">
+    <div class="bottle-glow"></div>
+    <!-- Hero SVG Bottle — Dior Sauvage style: tall angular dark blue flacon, rectangular cap -->
+    <svg viewBox="0 0 200 370" fill="none" xmlns="http://www.w3.org/2000/svg"
+         style="width:100%;height:100%;filter:drop-shadow(0 0 40px rgba(30,80,180,0.55))">
+      <!-- Cap: wide flat rectangular Dior Sauvage style -->
+      <rect x="70" y="10" width="60" height="36" rx="2" fill="url(#hCapGrad)" stroke="rgba(79,150,247,0.6)" stroke-width="0.6"/>
+      <rect x="74" y="13" width="52" height="28" rx="1" fill="rgba(255,255,255,0.06)"/>
+      <!-- Inner cap shine -->
+      <rect x="74" y="13" width="8" height="28" rx="1" fill="rgba(255,255,255,0.08)"/>
+      <!-- Neck -->
+      <rect x="84" y="46" width="32" height="20" rx="1" fill="url(#hNeckGrad)" stroke="rgba(79,150,247,0.35)" stroke-width="0.5"/>
+      <!-- Body: tall angular flacon -->
+      <rect x="25" y="66" width="150" height="258" rx="5" fill="url(#hBodyGrad)" stroke="rgba(60,130,255,0.5)" stroke-width="0.7"/>
+      <!-- Liquid fill -->
+      <rect x="28" y="69" width="144" height="252" rx="4" fill="url(#hLiquidGrad)" opacity="0.6"/>
+      <!-- Left edge glow -->
+      <rect x="25" y="66" width="3" height="258" rx="1" fill="url(#hEdgeGlow)" opacity="0.9"/>
+      <!-- Right edge glow -->
+      <rect x="172" y="66" width="3" height="258" rx="1" fill="url(#hEdgeGlow)" opacity="0.9"/>
+      <!-- Internal reflection streaks -->
+      <rect x="35" y="75" width="10" height="200" rx="5" fill="rgba(255,255,255,0.05)"/>
+      <rect x="50" y="75" width="4"  height="160" rx="2" fill="rgba(255,255,255,0.03)"/>
+      <!-- Horizontal label dividers -->
+      <line x1="35" y1="148" x2="165" y2="148" stroke="rgba(79,150,247,0.18)" stroke-width="0.6"/>
+      <line x1="35" y1="220" x2="165" y2="220" stroke="rgba(79,150,247,0.12)" stroke-width="0.6"/>
+      <!-- Label area -->
+      <rect x="45" y="152" width="110" height="64" rx="2" fill="rgba(0,10,30,0.35)" stroke="rgba(79,150,247,0.2)" stroke-width="0.5"/>
+      <text x="100" y="175" text-anchor="middle" font-family="'Syncopate',sans-serif" font-size="11" fill="rgba(220,232,255,0.95)" letter-spacing="3">EUNXIEL</text>
+      <text x="100" y="192" text-anchor="middle" font-family="'Rajdhani',sans-serif" font-size="8" fill="rgba(79,150,247,0.75)" letter-spacing="4.5">QUANTUM NOIR</text>
+      <line x1="62" y1="202" x2="138" y2="202" stroke="rgba(79,150,247,0.25)" stroke-width="0.5"/>
+      <text x="100" y="212" text-anchor="middle" font-family="'Rajdhani',sans-serif" font-size="6.5" fill="rgba(154,180,220,0.5)" letter-spacing="3">50 ML — EDP</text>
+      <!-- Bottom reflection -->
+      <ellipse cx="100" cy="318" rx="65" ry="7" fill="url(#hBottomHL)" opacity="0.5"/>
+      <defs>
+        <linearGradient id="hCapGrad" x1="70" y1="10" x2="130" y2="46" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#1a2850"/>
+          <stop offset="100%" stop-color="#0d1530"/>
+        </linearGradient>
+        <linearGradient id="hNeckGrad" x1="84" y1="46" x2="116" y2="66" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#1a2440"/>
+          <stop offset="100%" stop-color="#0a1225"/>
+        </linearGradient>
+        <linearGradient id="hBodyGrad" x1="25" y1="66" x2="175" y2="324" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#0e1e45"/>
+          <stop offset="40%"  stop-color="#081535"/>
+          <stop offset="100%" stop-color="#030818"/>
+        </linearGradient>
+        <linearGradient id="hLiquidGrad" x1="28" y1="69" x2="172" y2="321" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="rgba(60,120,255,0.25)"/>
+          <stop offset="50%"  stop-color="rgba(30,80,200,0.12)"/>
+          <stop offset="100%" stop-color="rgba(20,60,160,0.04)"/>
+        </linearGradient>
+        <linearGradient id="hEdgeGlow" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+          <stop offset="0%"   stop-color="rgba(60,130,255,0)"/>
+          <stop offset="35%"  stop-color="rgba(60,130,255,0.9)"/>
+          <stop offset="100%" stop-color="rgba(60,130,255,0)"/>
+        </linearGradient>
+        <radialGradient id="hBottomHL" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stop-color="rgba(60,130,255,0.8)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+    </svg>
+    <!-- Orbit rings -->
+    <div class="bottle-rings">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+    </div>
+  </div><!-- /hero-bottle-wrap -->
+
+  <!-- Title block: below bottle -->
+  <div class="hero-top-text">
+    <div class="hero-eyebrow">Collection MMXXVI — Synthetic Luxury</div>
+    <h1 class="hero-title">Engineered<br><em>Scent</em> of the Future</h1>
+    <p class="hero-sub">Molecular Precision · Synthetic Artistry · Next-Gen Fragrance</p>
+  </div>
+
+  <!-- Actions: bottom of hero -->
+  <div class="hero-bottom-actions">
+    <div class="hero-actions">
+      <button class="btn-primary"><span>Explore Collection</span></button>
+      <button class="btn-secondary">Our Science</button>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ──────────────────────────────────────────────── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Quantum Synthesis    <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Molecular Precision  <span class="marquee-dot"></span></span>
+    <span class="marquee-item">AI-Designed Accords  <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Neural Olfaction     <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Cruelty Free         <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Engineered Scent     <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Quantum Synthesis    <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Molecular Precision  <span class="marquee-dot"></span></span>
+    <span class="marquee-item">AI-Designed Accords  <span class="marquete-dot"></span></span>
+    <span class="marquee-item">Neural Olfaction     <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Cruelty Free         <span class="marquee-dot"></span></span>
+    <span class="marquee-item">Engineered Scent     <span class="marquee-dot"></span></span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     STORY / SCIENCE
+═══════════════════════════════════════════════════════════ -->
+<section id="science" style="padding:160px 80px 120px;">
+  <div class="story reveal">
+    <div class="story-visual">
+      <div class="story-panel">
+        <div class="story-holo">SCENT<br>DATA</div>
+      </div>
+      <div class="story-stats">
+        <div class="stat-box">
+          <div class="stat-num" data-count="147" data-suffix="">0</div>
+          <div class="stat-label">Molecules</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" data-count="99.7" data-suffix="%">0%</div>
+          <div class="stat-label">Purity</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" data-count="2041" data-suffix="">0</div>
+          <div class="stat-label">Hours of R&D</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" data-count="3000" data-suffix="+">0</div>
+          <div class="stat-label">Beta Testers</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="story-text">
+      <div class="section-label">Our Science</div>
+      <h2 class="section-title">Scent <em>Re-Engineered</em><br>From First Principles</h2>
+      <br>
+      <p>We don't blend tradition. We architect sensation. Every EUNXIEL fragrance begins not in a garden but in a quantum lab, where AI models map emotional response to molecular structure.</p>
+      <p>Our team of synthetic chemists and neuroscientists collaborate to design accords that bypass convention — built for the human nervous system of tomorrow.</p>
+      <div style="display:flex;gap:16px;margin-top:8px;flex-wrap:wrap;">
+        <button class="btn-primary"><span>Read Manifesto</span></button>
+        <button class="btn-secondary">Lab Tour</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     COLLECTION
+═══════════════════════════════════════════════════════════ -->
+<section class="products" id="collection">
+  <div class="products-header reveal">
+    <div>
+      <div class="section-label">The Collection</div>
+      <h2 class="section-title">Five <em>Frequencies</em></h2>
+    </div>
+    <div class="products-count">MMXXVI Season · Limited Run</div>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- ── VELA — Electric Blue (Dior Sauvage style: tall, angular, wide cap) ── -->
+    <div class="product-card reveal reveal-delay-1">
+      <svg class="product-bottle" viewBox="0 0 80 130" fill="none">
+        <!-- Wide flat Dior Sauvage cap -->
+        <rect x="16" y="4"  width="48" height="13" rx="1" fill="url(#vCap)" stroke="rgba(60,160,255,0.6)" stroke-width="0.6"/>
+        <rect x="18" y="6"  width="44" height="9"  rx="0.5" fill="rgba(80,170,255,0.1)"/>
+        <!-- Thin neck -->
+        <rect x="30" y="17" width="20" height="9" rx="0" fill="url(#vNeck)" stroke="rgba(60,160,255,0.35)" stroke-width="0.5"/>
+        <!-- Body — tall slender -->
+        <rect x="10" y="26" width="60" height="96" rx="2" fill="url(#vBody)" stroke="rgba(60,160,255,0.45)" stroke-width="0.6"/>
+        <!-- Liquid -->
+        <rect x="12" y="28" width="56" height="92" rx="1.5" fill="url(#vLiq)" opacity="0.55"/>
+        <!-- Left edge glow -->
+        <rect x="10" y="26" width="2"  height="96" fill="url(#vEdge)"/>
+        <!-- Right edge glow -->
+        <rect x="68" y="26" width="2"  height="96" fill="url(#vEdge)"/>
+        <!-- Highlight streak -->
+        <rect x="60" y="30" width="4"  height="60" rx="2" fill="rgba(120,200,255,0.08)"/>
+        <!-- Label -->
+        <line x1="14" y1="64" x2="66" y2="64" stroke="rgba(60,160,255,0.2)" stroke-width="0.5"/>
+        <text x="40" y="78" text-anchor="middle" font-family="'Syncopate',sans-serif" font-size="4.5" fill="rgba(180,220,255,0.9)" letter-spacing="2">VELA</text>
+        <text x="40" y="88" text-anchor="middle" font-family="'Rajdhani',sans-serif"  font-size="3.5" fill="rgba(60,160,255,0.6)"  letter-spacing="2">EUNXIEL · 01</text>
+        <line x1="14" y1="113" x2="66" y2="113" stroke="rgba(60,160,255,0.12)" stroke-width="0.5"/>
+        <!-- Bottom glow ellipse -->
+        <ellipse cx="40" cy="121" rx="25" ry="3" fill="rgba(60,160,255,0.3)" opacity="0.6"/>
+        <defs>
+          <linearGradient id="vCap"  x1="16" y1="4"  x2="64" y2="17" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#0d2550"/><stop offset="100%" stop-color="#061530"/>
+          </linearGradient>
+          <linearGradient id="vNeck" x1="30" y1="17" x2="50" y2="26" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#0d2040"/><stop offset="100%" stop-color="#071025"/>
+          </linearGradient>
+          <linearGradient id="vBody" x1="10" y1="26" x2="70" y2="122" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="#0a2048"/>
+            <stop offset="50%"  stop-color="#061535"/>
+            <stop offset="100%" stop-color="#030b1e"/>
+          </linearGradient>
+          <linearGradient id="vLiq"  x1="12" y1="28" x2="68" y2="120" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="rgba(60,140,255,0.35)"/>
+            <stop offset="60%"  stop-color="rgba(30,100,220,0.15)"/>
+            <stop offset="100%" stop-color="rgba(20,80,180,0.04)"/>
+          </linearGradient>
+          <linearGradient id="vEdge" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stop-color="rgba(60,160,255,0)"/>
+            <stop offset="40%"  stop-color="rgba(60,160,255,0.9)"/>
+            <stop offset="100%" stop-color="rgba(60,160,255,0)"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="product-name">Vela</div>
+      <div class="product-notes">
+        <span class="note-tag">Arctic Cedar</span>
+        <span class="note-tag">Musk</span>
+        <span class="note-tag">Ozone</span>
+      </div>
+      <div class="product-desc">Cold fusion of Nordic wood and synthetic ocean air.</div>
+      <div class="product-price">$165</div>
+      <button class="product-btn" data-name="Vela" data-price="165" data-id="vela">Add to Cart</button>
+    </div>
+
+    <!-- ── LYRA — Pink/Rose (YSL Libre style: bold square shoulder, wide body) ── -->
+    <div class="product-card reveal reveal-delay-2">
+      <svg class="product-bottle" viewBox="0 0 80 130" fill="none">
+        <!-- YSL Libre style cap: rectangular, taller -->
+        <rect x="28" y="2"  width="24" height="20" rx="1" fill="url(#lyCap)" stroke="rgba(255,120,160,0.55)" stroke-width="0.6"/>
+        <rect x="30" y="4"  width="20" height="16" rx="0.5" fill="rgba(255,150,190,0.1)"/>
+        <!-- Short thick neck -->
+        <rect x="32" y="22" width="16" height="8"  rx="0" fill="url(#lyNeck)" stroke="rgba(255,120,160,0.3)" stroke-width="0.5"/>
+        <!-- Body — wide square shouldered -->
+        <rect x="8"  y="30" width="64" height="92" rx="2" fill="url(#lyBody)" stroke="rgba(255,120,160,0.4)" stroke-width="0.6"/>
+        <!-- Liquid -->
+        <rect x="10" y="32" width="60" height="88" rx="1.5" fill="url(#lyLiq)" opacity="0.5"/>
+        <!-- Left edge -->
+        <rect x="8"  y="30" width="2"  height="92" fill="url(#lyEdge)"/>
+        <!-- Right edge -->
+        <rect x="70" y="30" width="2"  height="92" fill="url(#lyEdge)"/>
+        <!-- Highlight -->
+        <rect x="62" y="34" width="5"  height="55" rx="2.5" fill="rgba(255,180,210,0.07)"/>
+        <!-- Bold YSL-style label block -->
+        <rect x="14" y="54" width="52" height="44" rx="1" fill="rgba(20,5,15,0.4)" stroke="rgba(255,120,160,0.15)" stroke-width="0.5"/>
+        <text x="40" y="72" text-anchor="middle" font-family="'Syncopate',sans-serif" font-size="7" fill="rgba(255,200,220,0.95)" letter-spacing="1" font-weight="700">LYRA</text>
+        <line x1="20" y1="78" x2="60" y2="78" stroke="rgba(255,120,160,0.25)" stroke-width="0.5"/>
+        <text x="40" y="88" text-anchor="middle" font-family="'Rajdhani',sans-serif"  font-size="3.5" fill="rgba(255,120,160,0.55)" letter-spacing="2.5"> · 02</text>
+        <!-- Bottom -->
+        <ellipse cx="40" cy="121" rx="26" ry="3" fill="rgba(255,100,150,0.3)" opacity="0.6"/>
+        <defs>
+          <linearGradient id="lyCap"  x1="28" y1="2"  x2="52" y2="22" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#3a0820"/><stop offset="100%" stop-color="#1e0412"/>
+          </linearGradient>
+          <linearGradient id="lyNeck" x1="32" y1="22" x2="48" y2="30" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#2e0618"/><stop offset="100%" stop-color="#15030d"/>
+          </linearGradient>
+          <linearGradient id="lyBody" x1="8" y1="30" x2="72" y2="122" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="#3a0a20"/>
+            <stop offset="50%"  stop-color="#250615"/>
+            <stop offset="100%" stop-color="#10030a"/>
+          </linearGradient>
+          <linearGradient id="lyLiq"  x1="10" y1="32" x2="70" y2="120" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="rgba(255,80,140,0.35)"/>
+            <stop offset="60%"  stop-color="rgba(200,50,100,0.15)"/>
+            <stop offset="100%" stop-color="rgba(160,30,70,0.04)"/>
+          </linearGradient>
+          <linearGradient id="lyEdge" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stop-color="rgba(255,120,160,0)"/>
+            <stop offset="40%"  stop-color="rgba(255,120,160,0.85)"/>
+            <stop offset="100%" stop-color="rgba(255,120,160,0)"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="product-name">Lyra</div>
+      <div class="product-notes">
+        <span class="note-tag">Violet AI</span>
+        <span class="note-tag">Black Amber</span>
+        <span class="note-tag">Iris</span>
+      </div>
+      <div class="product-desc">AI-decoded violet frequency meets ancient amber resin.</div>
+      <div class="product-price">$175</div>
+      <button class="product-btn" data-name="Lyra" data-price="175" data-id="lyra">Add to Cart</button>
+    </div>
+
+    <!-- ── NEXUS ZERO (BEST SELLER) — Deep Navy/Black ── -->
+    <div class="product-card best reveal reveal-delay-3">
+      <div class="best-badge">⚡ Best Seller</div>
+      <svg class="product-bottle" viewBox="0 0 96 156" fill="none">
+        <!-- Wide authoritative cap -->
+        <rect x="22" y="4"  width="52" height="18" rx="2" fill="url(#nxCap)" stroke="rgba(79,195,247,0.6)" stroke-width="0.8"/>
+        <rect x="25" y="6"  width="46" height="13" rx="1" fill="rgba(79,195,247,0.09)"/>
+        <!-- Neck -->
+        <rect x="36" y="22" width="24" height="12" rx="1" fill="url(#nxNeck)" stroke="rgba(79,195,247,0.35)" stroke-width="0.5"/>
+        <!-- Body — imposing tall flacon -->
+        <rect x="5"  y="34" width="86" height="114" rx="3" fill="url(#nxBody)" stroke="rgba(79,195,247,0.5)" stroke-width="0.8"/>
+        <!-- Liquid fill -->
+        <rect x="8"  y="37" width="80" height="108" rx="2" fill="url(#nxLiq)" opacity="0.6"/>
+        <!-- Left edge -->
+        <rect x="5"  y="34" width="3"  height="114" fill="url(#nxEdge)"/>
+        <!-- Right edge -->
+        <rect x="88" y="34" width="3"  height="114" fill="url(#nxEdge)"/>
+        <!-- Highlights -->
+        <rect x="14" y="40" width="8"  height="80" rx="4" fill="rgba(255,255,255,0.05)"/>
+        <rect x="24" y="40" width="3"  height="60" rx="1.5" fill="rgba(255,255,255,0.03)"/>
+        <!-- Horizontal lines -->
+        <line x1="10" y1="90"  x2="86" y2="90"  stroke="rgba(79,195,247,0.12)" stroke-width="0.6"/>
+        <line x1="10" y1="120" x2="86" y2="120" stroke="rgba(79,195,247,0.08)" stroke-width="0.5"/>
+        <!-- Label -->
+        <rect x="18" y="95" width="60" height="22" rx="1" fill="rgba(0,10,25,0.5)" stroke="rgba(79,195,247,0.2)" stroke-width="0.5"/>
+        <text x="48" y="104" text-anchor="middle" font-family="'Syncopate',sans-serif" font-size="6"   fill="rgba(220,240,255,0.95)" letter-spacing="3">NEXUS</text>
+        <text x="48" y="113" text-anchor="middle" font-family="'Rajdhani',sans-serif"  font-size="5"   fill="rgba(79,195,247,0.75)" letter-spacing="3">ZERO · 03</text>
+        <!-- Bottom glow -->
+        <ellipse cx="48" cy="146" rx="36" ry="5" fill="rgba(40,120,255,0.35)" opacity="0.7"/>
+        <defs>
+          <linearGradient id="nxCap"  x1="22" y1="4"  x2="74" y2="22" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#081830"/><stop offset="100%" stop-color="#04101e"/>
+          </linearGradient>
+          <linearGradient id="nxNeck" x1="36" y1="22" x2="60" y2="34" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#061428"/><stop offset="100%" stop-color="#030c18"/>
+          </linearGradient>
+          <linearGradient id="nxBody" x1="5" y1="34" x2="91" y2="148" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="#040e20"/>
+            <stop offset="50%"  stop-color="#020a18"/>
+            <stop offset="100%" stop-color="#01050e"/>
+          </linearGradient>
+          <linearGradient id="nxLiq"  x1="8" y1="37" x2="88" y2="145" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="rgba(40,100,220,0.28)"/>
+            <stop offset="50%"  stop-color="rgba(20,70,180,0.14)"/>
+            <stop offset="100%" stop-color="rgba(10,50,140,0.04)"/>
+          </linearGradient>
+          <linearGradient id="nxEdge" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stop-color="rgba(79,195,247,0)"/>
+            <stop offset="35%"  stop-color="rgba(79,195,247,1)"/>
+            <stop offset="100%" stop-color="rgba(79,195,247,0)"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="product-name">Nexus Zero</div>
+      <div class="product-notes">
+        <span class="note-tag">Quantum Oud</span>
+        <span class="note-tag">Cryo Smoke</span>
+        <span class="note-tag">Vetiver</span>
+        <span class="note-tag">Antimatter</span>
+      </div>
+      <div class="product-desc">Our flagship. The scent of negative space and infinite depth.</div>
+      <div class="product-price">$220</div>
+      <button class="product-btn" data-name="Nexus Zero" data-price="220" data-id="nexus-zero">Add to Cart</button>
+    </div>
+
+    <!-- ── SOLIS — Gold/Orange (Dior J'adore style: curved waist, gold-toned) ── -->
+    <div class="product-card reveal reveal-delay-3">
+      <svg class="product-bottle" viewBox="0 0 80 130" fill="none">
+        <!-- Round cap like J'adore -->
+        <ellipse cx="40" cy="10" rx="14" ry="10" fill="url(#solCap)" stroke="rgba(255,185,60,0.55)" stroke-width="0.6"/>
+        <ellipse cx="40" cy="8"  rx="10" ry="6"   fill="rgba(255,210,100,0.12)"/>
+        <!-- Thin elegant neck -->
+        <rect x="34" y="20" width="12" height="12" rx="0" fill="url(#solNeck)" stroke="rgba(255,185,60,0.35)" stroke-width="0.5"/>
+        <!-- Body — slightly wider at bottom, curved waist feel -->
+        <path d="M15 32 Q12 70 14 92 Q15 120 20 122 L60 122 Q65 120 66 92 Q68 70 65 32 Z" fill="url(#solBody)" stroke="rgba(255,185,60,0.4)" stroke-width="0.6"/>
+        <!-- Liquid -->
+        <path d="M17 34 Q15 72 17 92 Q18 118 21 120 L59 120 Q62 118 63 92 Q65 72 63 34 Z" fill="url(#solLiq)" opacity="0.5"/>
+        <!-- Left edge glow -->
+        <path d="M15 40 Q13 70 15 100 L17 100 Q15 70 17 40 Z" fill="url(#solEdgeL)" opacity="0.8"/>
+        <!-- Right edge glow -->
+        <path d="M65 40 Q67 70 65 100 L63 100 Q65 70 63 40 Z" fill="url(#solEdgeR)" opacity="0.8"/>
+        <!-- Label -->
+        <rect x="19" y="62" width="42" height="38" rx="1" fill="rgba(15,10,0,0.45)" stroke="rgba(255,185,60,0.18)" stroke-width="0.5"/>
+        <text x="40" y="76" text-anchor="middle" font-family="'Syncopate',sans-serif" font-size="5" fill="rgba(255,230,150,0.95)" letter-spacing="1.5">SOLIS</text>
+        <line x1="24" y1="81" x2="56" y2="81" stroke="rgba(255,185,60,0.22)" stroke-width="0.5"/>
+        <text x="40" y="91" text-anchor="middle" font-family="'Rajdhani',sans-serif"  font-size="3.5" fill="rgba(255,185,60,0.55)" letter-spacing="2">EUNXIEL · 04</text>
+        <!-- Bottom glow -->
+        <ellipse cx="40" cy="122" rx="22" ry="3" fill="rgba(255,160,40,0.4)" opacity="0.7"/>
+        <defs>
+          <radialGradient id="solCap" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#3a2806"/>
+            <stop offset="100%" stop-color="#1e1402"/>
+          </radialGradient>
+          <linearGradient id="solNeck" x1="34" y1="20" x2="46" y2="32" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#2e2004"/><stop offset="100%" stop-color="#181002"/>
+          </linearGradient>
+          <linearGradient id="solBody" x1="15" y1="32" x2="65" y2="122" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="#2a1c04"/>
+            <stop offset="50%"  stop-color="#1a1002"/>
+            <stop offset="100%" stop-color="#0e0801"/>
+          </linearGradient>
+          <linearGradient id="solLiq"  x1="17" y1="34" x2="63" y2="120" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="rgba(255,160,40,0.4)"/>
+            <stop offset="60%"  stop-color="rgba(220,120,20,0.18)"/>
+            <stop offset="100%" stop-color="rgba(180,90,10,0.05)"/>
+          </linearGradient>
+          <linearGradient id="solEdgeL" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stop-color="rgba(255,185,60,0)"/>
+            <stop offset="45%"  stop-color="rgba(255,185,60,0.85)"/>
+            <stop offset="100%" stop-color="rgba(255,185,60,0)"/>
+          </linearGradient>
+          <linearGradient id="solEdgeR" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stop-color="rgba(255,185,60,0)"/>
+            <stop offset="45%"  stop-color="rgba(255,185,60,0.85)"/>
+            <stop offset="100%" stop-color="rgba(255,185,60,0)"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="product-name">Solis</div>
+      <div class="product-notes">
+        <span class="note-tag">Solar Citrus</span>
+        <span class="note-tag">White Musk</span>
+        <span class="note-tag">Helio</span>
+      </div>
+      <div class="product-desc">The geometry of sunlight distilled into molecular form.</div>
+      <div class="product-price">$155</div>
+      <button class="product-btn" data-name="Solis" data-price="155" data-id="solis">Add to Cart</button>
+    </div>
+
+    <!-- ── TERRA — Deep Forest Green (Dior Homme style: very clean, minimal, dark) ── -->
+    <div class="product-card reveal reveal-delay-4">
+      <svg class="product-bottle" viewBox="0 0 80 130" fill="none">
+        <!-- Dior Homme style: minimal flat cap, very clean rectangular body -->
+        <rect x="26" y="3"  width="28" height="12" rx="1" fill="url(#tCap)" stroke="rgba(60,200,100,0.5)" stroke-width="0.5"/>
+        <rect x="28" y="5"  width="24" height="8"  rx="0.5" fill="rgba(80,220,120,0.09)"/>
+        <!-- Clean straight neck -->
+        <rect x="33" y="15" width="14" height="11" rx="0" fill="url(#tNeck)" stroke="rgba(60,200,100,0.3)" stroke-width="0.4"/>
+        <!-- Body — clean geometric Dior Homme proportions -->
+        <rect x="9"  y="26" width="62" height="96" rx="2" fill="url(#tBody)" stroke="rgba(60,200,100,0.38)" stroke-width="0.6"/>
+        <!-- Liquid -->
+        <rect x="11" y="28" width="58" height="92" rx="1.5" fill="url(#tLiq)" opacity="0.5"/>
+        <!-- Left edge -->
+        <rect x="9"  y="26" width="2"  height="96" fill="url(#tEdge)"/>
+        <!-- Right edge -->
+        <rect x="69" y="26" width="2"  height="96" fill="url(#tEdge)"/>
+        <!-- Subtle highlight -->
+        <rect x="61" y="30" width="4"  height="55" rx="2" fill="rgba(100,255,140,0.06)"/>
+        <!-- Minimal label — clean Dior Homme inspired -->
+        <line x1="14" y1="66"  x2="66" y2="66"  stroke="rgba(60,200,100,0.18)" stroke-width="0.5"/>
+        <line x1="14" y1="108" x2="66" y2="108" stroke="rgba(60,200,100,0.12)" stroke-width="0.5"/>
+        <text x="40" y="82" text-anchor="middle" font-family="'Syncopate',sans-serif" font-size="5" fill="rgba(160,255,180,0.9)" letter-spacing="2">TERRA</text>
+        <text x="40" y="93" text-anchor="middle" font-family="'Rajdhani',sans-serif"  font-size="3.5" fill="rgba(60,200,100,0.55)" letter-spacing="2"> · 05</text>
+        <!-- Bottom glow -->
+        <ellipse cx="40" cy="121" rx="24" ry="3" fill="rgba(40,180,80,0.35)" opacity="0.7"/>
+        <defs>
+          <linearGradient id="tCap"  x1="26" y1="3"  x2="54" y2="15" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#061a0c"/><stop offset="100%" stop-color="#030e06"/>
+          </linearGradient>
+          <linearGradient id="tNeck" x1="33" y1="15" x2="47" y2="26" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#051608"/><stop offset="100%" stop-color="#020b04"/>
+          </linearGradient>
+          <linearGradient id="tBody" x1="9" y1="26" x2="71" y2="122" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="#061a0a"/>
+            <stop offset="50%"  stop-color="#041206"/>
+            <stop offset="100%" stop-color="#020803"/>
+          </linearGradient>
+          <linearGradient id="tLiq"  x1="11" y1="28" x2="69" y2="120" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="rgba(40,200,80,0.35)"/>
+            <stop offset="60%"  stop-color="rgba(20,150,50,0.15)"/>
+            <stop offset="100%" stop-color="rgba(10,100,30,0.04)"/>
+          </linearGradient>
+          <linearGradient id="tEdge" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stop-color="rgba(60,200,100,0)"/>
+            <stop offset="42%"  stop-color="rgba(60,200,100,0.85)"/>
+            <stop offset="100%" stop-color="rgba(60,200,100,0)"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="product-name">Terra</div>
+      <div class="product-notes">
+        <span class="note-tag">Petrichor</span>
+        <span class="note-tag">Bio-Moss</span>
+        <span class="note-tag">Loam</span>
+      </div>
+      <div class="product-desc">Reconstructed earth — the first rain on alien soil.</div>
+      <div class="product-price">$160</div>
+      <button class="product-btn" data-name="Terra" data-price="160" data-id="terra">Add to Cart</button>
+    </div>
+
+  </div><!-- /products-grid -->
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FEATURE STRIP
+═══════════════════════════════════════════════════════════ -->
+<div class="feature-strip">
+  <div class="feature-item reveal">
+    <span class="feature-num">01</span>
+    <span class="feature-icon">⬡</span>
+    <div class="feature-title">Quantum Synthesis</div>
+    <div class="feature-text">Our molecules are engineered at the quantum level for unprecedented olfactory precision and longevity.</div>
+  </div>
+  <div class="feature-item reveal reveal-delay-1">
+    <span class="feature-num">02</span>
+    <span class="feature-icon">◈</span>
+    <div class="feature-title">Neural Mapping</div>
+    <div class="feature-text">AI models trained on 40,000 emotional responses guide every accord composition we create.</div>
+  </div>
+  <div class="feature-item reveal reveal-delay-2">
+    <span class="feature-num">03</span>
+    <span class="feature-icon">◉</span>
+    <div class="feature-title">Zero Compromise</div>
+    <div class="feature-text">100% synthetic, cruelty-free, and carbon-neutral. No nature harmed in the making of tomorrow.</div>
+  </div>
+  <div class="feature-item reveal reveal-delay-3">
+    <span class="feature-num">04</span>
+    <span class="feature-icon">⬔</span>
+    <div class="feature-title">Adaptive Wear</div>
+    <div class="feature-text">Proprietary molecular bonding technology that reads and responds to your unique skin chemistry.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     RITUAL (PROCESS)
+═══════════════════════════════════════════════════════════ -->
+<section class="ritual" id="ritual">
+  <div class="section-label reveal">The Process</div>
+  <h2 class="section-title reveal" style="margin-bottom:0;">The <em>Ritual</em> of Creation</h2>
+
+  <div class="ritual-inner">
+    <div class="ritual-steps">
+      <div class="ritual-step reveal">
+        <span class="ritual-step-num">01</span>
+        <div class="ritual-step-body">
+          <h3>Neural Profiling</h3>
+          <p>Our AI analyzes 10,000 olfactory memory patterns to establish your emotional scent signature baseline.</p>
+        </div>
+      </div>
+      <div class="ritual-step reveal reveal-delay-1">
+        <span class="ritual-step-num">02</span>
+        <div class="ritual-step-body">
+          <h3>Molecular Design</h3>
+          <p>Synthetic chemists architect each accord from first principles — no natural ingredients, only precision-engineered molecules.</p>
+        </div>
+      </div>
+      <div class="ritual-step reveal reveal-delay-2">
+        <span class="ritual-step-num">03</span>
+        <div class="ritual-step-body">
+          <h3>Quantum Blending</h3>
+          <p>Formulas are assembled at 21.4°C in a cleanroom environment to lock in molecular coherence and sillage.</p>
+        </div>
+      </div>
+      <div class="ritual-step reveal reveal-delay-3">
+        <span class="ritual-step-num">04</span>
+        <div class="ritual-step-body">
+          <h3>Adaptive Encoding</h3>
+          <p>A proprietary bonding layer is applied that interacts with your skin's unique biochemistry over 24 hours.</p>
+        </div>
+      </div>
+      <div class="ritual-step reveal reveal-delay-4">
+        <span class="ritual-step-num">05</span>
+        <div class="ritual-step-body">
+          <h3>Quantum Seal</h3>
+          <p>Every bottle is cryptographically sealed with a unique NFC chip that verifies authenticity and batch origin.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="ritual-visual reveal reveal-delay-2">
+      <div class="ritual-mol"></div>
+      <div class="ritual-mol"></div>
+      <div class="ritual-mol"></div>
+      <div class="ritual-center">
+        <div class="ritual-center-text" style="margin-bottom:28px;">Molecular Core</div>
+        <div class="ritual-bottles-row">
+
+          <!-- VELA — blue -->
+          <div class="ritual-bottle-item">
+            <svg viewBox="0 0 80 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="ritual-bottle-svg">
+              <rect x="28" y="4"  width="24" height="14" rx="1" fill="#0e1e45" stroke="rgba(79,150,247,0.5)" stroke-width="0.5"/>
+              <rect x="32" y="18" width="16" height="8"  rx="1" fill="#0a1530" stroke="rgba(79,150,247,0.3)" stroke-width="0.4"/>
+              <rect x="10" y="26" width="60" height="104" rx="3" fill="url(#vBodyG)" stroke="rgba(60,130,255,0.5)" stroke-width="0.6"/>
+              <rect x="12" y="28" width="56" height="100" rx="2" fill="url(#vLiqG)" opacity="0.5"/>
+              <rect x="10" y="26" width="2.5" height="104" rx="1" fill="url(#vEdgeG)" opacity="0.8"/>
+              <rect x="67.5" y="26" width="2.5" height="104" rx="1" fill="url(#vEdgeG)" opacity="0.8"/>
+              <text x="40" y="82" text-anchor="middle" font-family="'Syncopate',sans-serif" font-size="5" fill="rgba(220,232,255,0.9)" letter-spacing="1.5">VELA</text>
+              <text x="40" y="92" text-anchor="middle" font-family="'Rajdhani',sans-serif" font-size="3.5" fill="rgba(79,150,247,0.6)" letter-spacing="2">QUANTUM · 01</text>
+              <defs>
+                <linearGradient id="vBodyG" x1="10" y1="26" x2="70" y2="130" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%"  stop-color="#0e1e45"/>
+                  <stop offset="100%" stop-color="#030818"/>
+                </linearGradient>
+                <linearGradient id="vLiqG" x1="10" y1="26" x2="70" y2="130" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%"  stop-color="rgba(60,120,255,0.3)"/>
+                  <stop offset="100%" stop-color="rgba(20,60,160,0.05)"/>
+                </linearGradient>
+                <linearGradient id="vEdgeG" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+                  <stop offset="0%"  stop-color="rgba(60,130,255,0)"/>
+                  <stop offset="40%" stop-color="rgba(60,130,255,0.9)"/>
+                  <stop offset="100%" stop-color="rgba(60,130,255,0)"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="ritual-bottle-name">Vela</div>
+          </div>
+
+          <!-- LYRA — red/violet -->
+          <div class="ritual-bottle-item">
+            <svg viewBox="0 0 80 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="ritual-bottle-svg">
+              <rect x="28" y="4"  width="24" height="14" rx="1" fill="#2a0a20" stroke="rgba(200,80,120,0.5)" stroke-width="0.5"/>
+              <rect x="32" y="18" width="16" height="8"  rx="1" fill="#1a0515" stroke="rgba(200,80,120,0.3)" stroke-width="0.4"/>
+              <rect x="10" y="26" width="60" height="104" rx="3" fill="url(#lBodyG)" stroke="rgba(180,60,100,0.5)" stroke-width="0.6"/>
+              <rect x="12" y="28" width="56" height="100" rx="2" fill="url(#lLiqG)" opacity="0.5"/>
+              <rect x="10" y="26" width="2.5" height="104" rx="1" fill="url(#lEdgeG)" opacity="0.8"/>
+              <rect x="67.5" y="26" width="2.5" height="104" rx="1" fill="url(#lEdgeG)" opacity="0.8"/>
+              <text x="40" y="82" text-anchor="middle" font-family="'Syncopate',sans-serif" font-size="5" fill="rgba(220,232,255,0.9)" letter-spacing="1.5">LYRA</text>
+              <text x="40" y="92" text-anchor="middle" font-family="'Rajdhani',sans-serif" font-size="3.5" fill="rgba(200,80,120,0.7)" letter-spacing="2">QUANTUM · 02</text>
+              <defs>
+                <linearGradient id="lBodyG" x1="10" y1="26" x2="70" y2="130" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%"  stop-color="#3a0a25"/>
+                  <stop offset="100%" stop-color="#0f0208"/>
+                </linearGradient>
+                <linearGradient id="lLiqG" x1="10" y1="26" x2="70" y2="130" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%"  stop-color="rgba(200,60,120,0.3)"/>
+                  <stop offset="100%" stop-color="rgba(100,20,60,0.05)"/>
+                </linearGradient>
+                <linearGradient id="lEdgeG" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+                  <stop offset="0%"  stop-color="rgba(200,60,120,0)"/>
+                  <stop offset="40%" stop-color="rgba(200,60,120,0.9)"/>
+                  <stop offset="100%" stop-color="rgba(200,60,120,0)"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="ritual-bottle-name">Lyra</div>
+          </div>
+
+          <!-- NEXUS ZERO — teal/dark blue (featured) -->
+          <div class="ritual-bottle-item ritual-bottle-featured">
+            <svg viewBox="0 0 80 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="ritual-bottle-svg">
+              <rect x="24" y="2"  width="32" height="16" rx="1" fill="#081830" stroke="rgba(79,195,247,0.7)" stroke-width="0.6"/>
+              <rect x="30" y="18" width="20" height="8"  rx="1" fill="#040f20" stroke="rgba(79,195,247,0.4)" stroke-width="0.4"/>
+              <rect x="6"  y="26" width="68" height="108" rx="3" fill="url(#nBodyG)" stroke="rgba(79,195,247,0.6)" stroke-width="0.7"/>
+              <rect x="8"  y="28" width="64" height="104" rx="2" fill="url(#nLiqG)" opacity="0.5"/>
+              <rect x="6"  y="26" width="3"  height="108" rx="1" fill="url(#nEdgeG)" opacity="0.9"/>
+              <rect x="71" y="26" width="3"  height="108" rx="1" fill="url(#nEdgeG)" opacity="0.9"/>
+              <text x="40" y="80" text-anchor="middle" font-family="'Syncopate',sans-serif" font-size="5" fill="rgba(220,232,255,0.95)" letter-spacing="1.5">NEXUS</text>
+              <text x="40" y="90" text-anchor="middle" font-family="'Syncopate',sans-serif" font-size="4" fill="rgba(220,232,255,0.7)" letter-spacing="1">ZERO</text>
+              <text x="40" y="100" text-anchor="middle" font-family="'Rajdhani',sans-serif" font-size="3.5" fill="rgba(79,195,247,0.7)" letter-spacing="2">QUANTUM · 03</text>
+              <defs>
+                <linearGradient id="nBodyG" x1="6" y1="26" x2="74" y2="134" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%"  stop-color="#0e1e45"/>
+                  <stop offset="50%" stop-color="#081535"/>
+                  <stop offset="100%" stop-color="#030818"/>
+                </linearGradient>
+                <linearGradient id="nLiqG" x1="6" y1="26" x2="74" y2="134" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%"  stop-color="rgba(60,120,255,0.3)"/>
+                  <stop offset="100%" stop-color="rgba(20,60,160,0.05)"/>
+                </linearGradient>
+                <linearGradient id="nEdgeG" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+                  <stop offset="0%"  stop-color="rgba(79,195,247,0)"/>
+                  <stop offset="40%" stop-color="rgba(79,195,247,1)"/>
+                  <stop offset="100%" stop-color="rgba(79,195,247,0)"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="ritual-bottle-name" style="color:var(--neon-blue);">Nexus Zero</div>
+          </div>
+
+          <!-- SOLIS — amber/gold -->
+          <div class="ritual-bottle-item">
+            <svg viewBox="0 0 80 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="ritual-bottle-svg">
+              <ellipse cx="40" cy="11" rx="14" ry="10" fill="#1a1000" stroke="rgba(200,150,40,0.5)" stroke-width="0.5"/>
+              <rect x="32" y="18" width="16" height="8" rx="1" fill="#120c00" stroke="rgba(200,150,40,0.3)" stroke-width="0.4"/>
+              <rect x="10" y="26" width="60" height="104" rx="3" fill="url(#sBodyG)" stroke="rgba(180,130,30,0.5)" stroke-width="0.6"/>
+              <rect x="12" y="28" width="56" height="100" rx="2" fill="url(#sLiqG)" opacity="0.5"/>
+              <rect x="10" y="26" width="2.5" height="104" rx="1" fill="url(#sEdgeG)" opacity="0.8"/>
+              <rect x="67.5" y="26" width="2.5" height="104" rx="1" fill="url(#sEdgeG)" opacity="0.8"/>
+              <text x="40" y="82" text-anchor="middle" font-family="'Syncopate',sans-serif" font-size="5" fill="rgba(220,232,255,0.9)" letter-spacing="1.5">SOLIS</text>
+              <text x="40" y="92" text-anchor="middle" font-family="'Rajdhani',sans-serif" font-size="3.5" fill="rgba(200,150,40,0.7)" letter-spacing="2">QUANTUM · 04</text>
+              <defs>
+                <linearGradient id="sBodyG" x1="10" y1="26" x2="70" y2="130" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%"  stop-color="#2a1a00"/>
+                  <stop offset="100%" stop-color="#0a0600"/>
+                </linearGradient>
+                <linearGradient id="sLiqG" x1="10" y1="26" x2="70" y2="130" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%"  stop-color="rgba(220,160,40,0.3)"/>
+                  <stop offset="100%" stop-color="rgba(100,70,10,0.05)"/>
+                </linearGradient>
+                <linearGradient id="sEdgeG" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+                  <stop offset="0%"  stop-color="rgba(220,160,40,0)"/>
+                  <stop offset="40%" stop-color="rgba(220,160,40,0.9)"/>
+                  <stop offset="100%" stop-color="rgba(220,160,40,0)"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="ritual-bottle-name">Solis</div>
+          </div>
+
+          <!-- TERRA — green -->
+          <div class="ritual-bottle-item">
+            <svg viewBox="0 0 80 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="ritual-bottle-svg">
+              <rect x="28" y="4"  width="24" height="14" rx="2" fill="#061a08" stroke="rgba(60,180,80,0.5)" stroke-width="0.5"/>
+              <rect x="32" y="18" width="16" height="8"  rx="1" fill="#03100a" stroke="rgba(60,180,80,0.3)" stroke-width="0.4"/>
+              <rect x="10" y="26" width="60" height="104" rx="3" fill="url(#tBodyG)" stroke="rgba(40,160,60,0.5)" stroke-width="0.6"/>
+              <rect x="12" y="28" width="56" height="100" rx="2" fill="url(#tLiqG)" opacity="0.5"/>
+              <rect x="10" y="26" width="2.5" height="104" rx="1" fill="url(#tEdgeG)" opacity="0.8"/>
+              <rect x="67.5" y="26" width="2.5" height="104" rx="1" fill="url(#tEdgeG)" opacity="0.8"/>
+              <text x="40" y="82" text-anchor="middle" font-family="'Syncopate',sans-serif" font-size="5" fill="rgba(220,232,255,0.9)" letter-spacing="1.5">TERRA</text>
+              <text x="40" y="92" text-anchor="middle" font-family="'Rajdhani',sans-serif" font-size="3.5" fill="rgba(60,180,80,0.7)" letter-spacing="2">QUANTUM · 05</text>
+              <defs>
+                <linearGradient id="tBodyG" x1="10" y1="26" x2="70" y2="130" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%"  stop-color="#061a08"/>
+                  <stop offset="100%" stop-color="#020805"/>
+                </linearGradient>
+                <linearGradient id="tLiqG" x1="10" y1="26" x2="70" y2="130" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%"  stop-color="rgba(40,180,60,0.3)"/>
+                  <stop offset="100%" stop-color="rgba(10,80,20,0.05)"/>
+                </linearGradient>
+                <linearGradient id="tEdgeG" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+                  <stop offset="0%"  stop-color="rgba(40,180,60,0)"/>
+                  <stop offset="40%" stop-color="rgba(40,180,60,0.9)"/>
+                  <stop offset="100%" stop-color="rgba(40,180,60,0)"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="ritual-bottle-name">Terra</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     TESTIMONIALS
+═══════════════════════════════════════════════════════════ -->
+<section class="testimonials" id="Review">
+  <div class="testimonials-header">
+    <div class="section-label reveal">What They Say</div>
+    <h2 class="section-title reveal">From <em>Early Adopters</em></h2>
+  </div>
+
+  <div class="testimonials-grid">
+
+    <div class="testimonial-card reveal reveal-delay-1">
+      <div class="testimonial-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="testimonial-text">Nexus Zero doesn't smell like anything I've ever encountered. It's not trying to mimic nature — it's creating something entirely new. That's exactly what I wanted.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">KL</div>
+        <div class="author-info">
+          <div class="name">Kaito Linden</div>
+          <div class="role">Creative Director, Tokyo</div>
+        </div>
+      </div>
+      <div class="testimonial-scent">Nexus Zero</div>
+    </div>
+
+    <div class="testimonial-card reveal reveal-delay-2">
+      <div class="testimonial-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="testimonial-text">Lyra is the first fragrance I've worn that actually shifts throughout the day. By evening it's an entirely different accord — intelligent, adaptive, genuinely futuristic.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">AR</div>
+        <div class="author-info">
+          <div class="name">Anika Roth</div>
+          <div class="role">Architect, Berlin</div>
+        </div>
+      </div>
+      <div class="testimonial-scent">Lyra</div>
+    </div>
+
+    <div class="testimonial-card reveal reveal-delay-3">
+      <div class="testimonial-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="testimonial-text">Terra is a meditation. Rain on mineral rock, but rendered with a clarity that no natural extract could achieve. I wear it to think. Twelve-hour sillage, zero compromise.</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">MV</div>
+        <div class="author-info">
+          <div class="name">Maya Voss</div>
+          <div class="role">Neuroscientist, Geneva</div>
+        </div>
+      </div>
+      <div class="testimonial-scent">Terra</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     NEWSLETTER CTA
+═══════════════════════════════════════════════════════════ -->
+<section class="newsletter">
+  <div class="newsletter-inner reveal">
+    <div class="section-label" style="text-align:center;">Join the Lab</div>
+    <h2 class="section-title" style="text-align:center;">
+      First Access to <em>Future</em><br>Formulations
+    </h2>
+    <p class="newsletter-sub">Early members receive exclusive drops, batch-zero editions, and an invite to our quantum lab immersion sessions.</p>
+
+    <form class="newsletter-form" id="newsletter-form" onsubmit="return false;">
+      <input
+        class="newsletter-input"
+        id="newsletter-email"
+        type="email"
+        placeholder="Your email address"
+        autocomplete="off"
+      >
+      <button class="newsletter-submit" id="newsletter-btn" type="submit">Subscribe</button>
+    </form>
+
+    <div class="newsletter-note" id="newsletter-notice" style="min-height:18px;transition:opacity 0.4s;">
+      No spam. Unsubscribe at any time. Quantum-encrypted.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand reveal">
+      <span class="footer-logo">EUNXI<span>EL</span></span>
+      <p>Engineered for a future where scent is not worn but experienced. Quantum-born, cruelty-free, and built to outlast nature.</p>
+    </div>
+
+    <div class="footer-col reveal reveal-delay-1">
+      <h4>Collection</h4>
+      <ul>
+        <li><a href="#">Vela</a></li>
+        <li><a href="#">Lyra</a></li>
+        <li><a href="#">Nexus Zero</a></li>
+        <li><a href="#">Solis</a></li>
+        <li><a href="#">Terra</a></li>
+        <li><a href="#">All Fragrances</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col reveal reveal-delay-2">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">Our Science</a></li>
+        <li><a href="#">Lab Tour</a></li>
+        <li><a href="#">Manifesto</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col reveal reveal-delay-3">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Shipping</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Eunxiel Labs. All Rights Reserved.</div>
+    <div class="footer-socials">
+      <a href="#">Instagram</a>
+      <a href="#">X / Twitter</a>
+      <a href="#">LinkedIn</a>
+    </div>
+    <div class="footer-copy">NX-2401 · Batch Certified</div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
