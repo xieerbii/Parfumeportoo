@@ -1,5 +1,5 @@
 /* ============================================================
-   EUNXIEL — Luxury Futuristic Perfume
+   AURANOX — Luxury Futuristic Perfume
    styles.css
    ============================================================ */
 
@@ -1153,25 +1153,108 @@ footer {
   .testimonials-grid { grid-template-columns: 1fr 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
 }
+
 @media (max-width: 900px) {
-  nav { padding: 20px 28px; }
+  nav { padding: 16px 20px; }
   .nav-links { display: none; }
-  section { padding: 80px 28px; }
+  section { padding: 80px 24px; }
   .story { grid-template-columns: 1fr; gap: 40px; }
   .story-visual { height: 320px; }
   .products-grid { grid-template-columns: 1fr 1fr; }
   .feature-strip { grid-template-columns: 1fr 1fr; }
   .ritual-inner { grid-template-columns: 1fr; }
   .testimonials-grid { grid-template-columns: 1fr; }
-  .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; padding: 40px 28px; }
-  .footer-bottom { padding: 24px 28px; flex-direction: column; gap: 12px; text-align: center; }
-  .newsletter { padding: 80px 28px; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; padding: 40px 24px; }
+  .footer-bottom { padding: 20px 24px; flex-direction: column; gap: 12px; text-align: center; }
+  .newsletter { padding: 80px 24px; }
+  .cart-drawer { width: 100vw; }
 }
+
 @media (max-width: 600px) {
-  .products-grid { grid-template-columns: 1fr; }
-  .hero-bottle-wrap { width: 200px; height: 300px; }
-  .feature-strip { grid-template-columns: 1fr; }
-  .footer-top { grid-template-columns: 1fr; }
+  /* ── NAV ── */
+  nav { padding: 14px 16px; }
+  .nav-logo { font-size: 14px; letter-spacing: 0.2em; }
+  .nav-right { gap: 10px; }
+  .nav-cta { padding: 8px 14px; font-size: 9px; }
+
+  /* ── HERO ── */
+  .hero { padding-top: 70px; padding-bottom: 40px; gap: 0; }
+  .hero-bottle-wrap { width: 160px; height: 260px; }
+  .hero-top-text { margin-top: 0; padding: 0 16px; }
+  .hero-title { font-size: clamp(20px, 7vw, 36px); letter-spacing: 0.08em; margin-bottom: 8px; }
+  .hero-eyebrow { font-size: 9px; letter-spacing: 0.3em; margin-bottom: 14px; }
+  .hero-sub { font-size: 9px; letter-spacing: 0.2em; margin-bottom: 14px; }
+  .hero-bottom-actions { margin-top: 10px; }
+  .hero-actions { gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .btn-primary, .btn-secondary { font-size: 9px; padding: 10px 18px; }
+  .holo-panel { display: none; }
+
+  /* ── STORY / STATS ── */
+  #science { padding: 60px 16px 60px !important; }
+  .story { grid-template-columns: 1fr; gap: 24px; }
+  .story-visual { height: auto; position: relative; }
+  .story-panel { position: relative; height: 160px; }
+  .story-holo { font-size: 32px; }
+  .story-stats {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 2px;
+  }
+  .stat-box { padding: 16px 10px; }
+  .stat-num { font-size: 22px; }
+  .stat-label { font-size: 8px; letter-spacing: 0.2em; }
+  .story-text { padding: 0; }
+  .story-text .section-title { font-size: clamp(20px, 6vw, 32px); }
+  .story-text p { font-size: 13px; line-height: 1.8; }
+
+  /* ── PRODUCTS ── */
+  .products-grid { grid-template-columns: 1fr; gap: 2px; }
+  .products-header { flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 32px; }
+  .products-count { font-size: 9px; }
+  .section-title { font-size: clamp(22px, 6vw, 36px); }
+  .product-card { padding: 24px 20px; }
+  .product-bottle { width: 80px; height: 100px; }
+
+  /* ── FEATURE STRIP ── */
+  .feature-strip { grid-template-columns: 1fr 1fr; gap: 1px; }
+  .feature-item { padding: 24px 16px; }
+  .feature-title { font-size: 10px; }
+  .feature-text { font-size: 11px; line-height: 1.6; }
+
+  /* ── RITUAL ── */
+  .ritual-inner { grid-template-columns: 1fr; }
+  .ritual-visual { height: 320px; }
+  .ritual-bottles-row { gap: 8px; }
+  .ritual-bottle-svg { width: 48px; height: 76px; }
+  .ritual-bottle-featured .ritual-bottle-svg { width: 60px; height: 96px; }
+  .ritual-bottle-name { font-size: 6px; }
+  .ritual-center-text { font-size: 9px; margin-bottom: 16px !important; }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .testimonial-card { padding: 24px 20px; }
+
+  /* ── NEWSLETTER ── */
+  .newsletter { padding: 60px 16px; }
+  .newsletter-form { flex-direction: column; gap: 8px; }
+  .newsletter-input { border-right: 1px solid var(--glass-border); }
+  .newsletter-submit { width: 100%; padding: 14px; }
+
+  /* ── FOOTER ── */
+  .footer-top { grid-template-columns: 1fr; gap: 28px; padding: 40px 16px; }
+  .footer-bottom { padding: 16px; flex-direction: column; gap: 10px; text-align: center; }
+
+  /* ── CART DRAWER ── */
+  .cart-drawer { width: 100vw; }
+  .cart-header { padding: 20px 16px; }
+  .cart-item { padding: 12px 16px; }
+  .cart-footer { padding: 16px; }
+  .checkout-modal { max-height: 100vh; border-radius: 0; }
+  .checkout-body { padding: 16px; }
+  .checkout-modal .cart-checkout-btn { margin: 0 16px 8px; width: calc(100% - 32px); }
+  .checkout-row { grid-template-columns: 1fr 1fr; }
 }
 
 /* ── NAV RIGHT ───────────────────────────────────────────────── */
